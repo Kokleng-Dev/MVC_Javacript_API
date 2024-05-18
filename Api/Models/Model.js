@@ -1,6 +1,6 @@
 import { SERVICES } from "../Providers/ServiceProvider";
-import RouteProvider from './../Providers/RouteProvider.js'
-import { RequestProvider } from "../Providers/RequestProvider.js";
+import RouteProvider from '../Providers/RouteServiceProvider.js'
+import { RequestProvider } from "../Providers/RequestServiceProvider.js";
 export class Model{
     url = SERVICES.URL;
     request = RequestProvider;
