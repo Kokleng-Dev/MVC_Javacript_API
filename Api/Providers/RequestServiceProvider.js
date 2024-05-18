@@ -44,7 +44,7 @@ const http = async (objs) => {
 
 
 
-export const RequestProvider = {
+export const requestServiceProvider = {
     get : async (objs) => await http({ url : objs.url ,method : 'GET', headers : objs.headers | {} }),
     post : async (objs) => await http({ url : objs.url ,method : 'POST', headers : objs.headers | {}, data : objs.data | null }),
     put : async (objs) => await http({ url : objs.url ,method : 'POST', headers : objs.headers | {}, data : objs.data | null }),

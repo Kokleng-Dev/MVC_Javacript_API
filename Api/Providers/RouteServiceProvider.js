@@ -4,22 +4,24 @@ function getRoute(path, obj) {
     return path.split('.').reduce((acc, part) => acc && acc[part], obj);
 }
 
-export function routeService(name, params = {}, queryParams = {}){
+export function routeServiceProvider(name, params = {}, queryParams = {}){
     const path = getRoute(name, routes);
 
     if (!path) {
         throw new Error(`Route "${name}" not defined.`);
     }
 
+    let url = path;
+
     for (const param in params) {
-        path = path.replace(`{${param}}`, params[param]);
+        url = url.replace(`{${param}}`, params[param]);
     }
 
     const queryString = Object.keys(queryParams)
         .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(queryParams[key])}`)
         .join('&');
 
-    return queryString ? `${path}?${queryString}` : path;
+    return queryString ? `${url}?${queryString}` : url;
 }
 
 /*

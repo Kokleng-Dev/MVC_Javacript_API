@@ -1,15 +1,24 @@
-import { SERVICES } from "../Providers/ServiceProvider";
-import RouteProvider from '../Providers/RouteServiceProvider.js'
-import { RequestProvider } from "../Providers/RequestServiceProvider.js";
+import { serviceProvider } from "../Providers/ServiceProvider";
+import { routeServiceProvider } from "../Providers/RouteServiceProvider.js";
+import { requestServiceProvider } from "../Providers/RequestServiceProvider.js";
+
 export class Model{
-    url = SERVICES.URL;
-    request = RequestProvider;
+    constructor(routeServiceProvider,requestServiceProvider,serviceProvider){
+        //url and file url
+        this.url = serviceProvider.URL;
+        this.resource = serviceProvider.RESOURCE;
+
+        // request and route
+        this.request = requestServiceProvider;
+        this.router = routeServiceProvider;
+    }
+    
     route(endPoints){
         if(typeof endPoints !== 'object' && endPoints === null){
             throw new Error(`Route is not defined.`);
         }
         let { name, params, queryParams } = endPoints;
-        return `${SERVICES.URL}${RouteProvider.routeService(name, params | {}, queryParams | {})}`;
+        return `${this.url}${this.router(name, params | {}, queryParams | {})}`;
     }
 }
 
