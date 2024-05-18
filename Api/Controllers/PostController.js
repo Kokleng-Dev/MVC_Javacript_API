@@ -1,11 +1,13 @@
 
 import { Controller } from "./Controller";
+import { PostValidation } from "../Validations/PostValidation";
 import { PostModel } from "../Models/PostModel";
 
 export class PostController extends Controller {
 
-    constructor(PostModel){
+    constructor(PostModel, PostValidation){
         this.postModel = PostModel;
+        this.postValidation = PostValidation;
     }
     async index(){
         try {
@@ -17,6 +19,10 @@ export class PostController extends Controller {
     }
     async store({data : data}){
         try {
+            if(!this.postValidation.store(data)){
+                window.alert('Wooooooo, Check your data please .... xD');
+                return ;
+            }
             return await this.postModel.store({data : data});
         } catch (error) {
             // handle your popup message here ...
