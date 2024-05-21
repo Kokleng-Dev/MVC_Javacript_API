@@ -25,12 +25,12 @@ export function routeServiceProvider(name, params = {}, queryParams = {}){
 }
 
 /*
-    How to user? 
-    1.If user like this :
+    How to use? 
+    1.If use like this :
         Input : route('post', { id: postId }, { search: 'settings' })
         Output : /user/42?search=settings
 
-    2.If user like this :
+    2.If use like this :
         Input : route('post', { id: postId , search: 'settings' })
         Output : /user/42/settings
 */
