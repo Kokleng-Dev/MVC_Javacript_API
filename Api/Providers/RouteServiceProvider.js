@@ -1,4 +1,4 @@
-import { routes } from "../Routes.js/web";
+import { routes } from "../Routes/web";
 
 function getRoute(path, obj) {
     return path.split('.').reduce((acc, part) => acc && acc[part], obj);
