@@ -3,7 +3,9 @@ import Model from './Model.js'
 export class PostModel extends Model {
     async index(){
         try {
-            const res = await this.request.get(this.route({ name : 'post.list' }));
+            const res = await this.request.get({
+                url : this.route({ name : 'post.list' })
+            });
             return {
                 date : res.date,
                 title : res.title,
@@ -28,21 +30,34 @@ export class PostModel extends Model {
     }
     async store({data : data}){
         try {
-            return await this.request.post(this.route({ name : 'post.store' }), { data : data});
+            return await this.request.post({
+                url : this.route({ name : 'post.store' }),
+                data : data
+            });
         } catch (error) {
             throw new Error(error)
         }
     }
     async update({postId : postId, data : data}){
         try {
-            return await this.request.patch(this.route({ name : 'post.update', params : { postId : postId } }), { data : data });
+            return await this.request.patch({
+                url : this.route({ name : 'post.update', params : { postId : postId } }),
+                data : data
+            });
         } catch (error) {
             throw new Error(error)
         }
     }
     async delete({postId : postId}){
         try {
-            return await this.request.delete(this.route({ name : 'post.delete', params : { postId : postId } }));
+            return await this.request.delete({
+                url : this.route({ 
+                    name : 'post.delete', 
+                    params : { 
+                        postId : postId 
+                    } 
+                })
+            });
         } catch (error) {
             throw new Error(error)
         }
